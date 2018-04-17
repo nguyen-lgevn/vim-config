@@ -237,12 +237,34 @@ nnoremap <C-H> <C-W><C-H>
 "  Plugins settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" pathogen
+execute pathogen#infect()
+
 " airline
 set runtimepath^=~/.vim/vim-airline/autoload/airline.vim
 let g:airline_theme='cool'
 
 " clang_complete
-"let g:clang_library_path=/data001/nguyen.hoang/opt/clang/lib/libclang.so
+let g:clang_library_path='/data001/nguyen.hoang/opt/clang/lib/libclang.so'
+
+" python mode
+
+" NERDTree
+
+" open NERDTree automatically when vim starts up
+autocmd vimenter * NERDTree
+
+" open NERDTree with Ctrl+n
+" map <C-n> :NERDTreeToggle<CR>
+
+" close when the only window is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Tagbar
+"let g:tagbar_ctags_bin
+
+" quickstart tagbar
+nmap <F8> :TagbarToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Helper functions
@@ -283,7 +305,7 @@ endfunction
 " Check file readonly
 function! ReadOnly()
     if &readonly || !&modifiable
-        return 'ðŸ”“'
+        return '🔓'
     else
         return ''
     endif
@@ -297,4 +319,3 @@ endfunction
 "    let l:branchname = GitBranch()
 "    return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 "endfunction
-
